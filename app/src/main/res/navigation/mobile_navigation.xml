@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_home3">
+
+    <fragment
+        android:id="@+id/navigation_category"
+        android:name="com.system.daisy.navigation_category"
+        android:label="Category"
+        tools:layout="@layout/fragment_navigation_category" />
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.system.daisy.navigation_search"
+        android:label="fragment_navigation_search"
+        tools:layout="@layout/fragment_navigation_search" />
+    <fragment
+        android:id="@+id/navigation_home3"
+        android:name="com.system.daisy.navigation_home"
+        android:label="fragment_navigation_home"
+        tools:layout="@layout/fragment_navigation_home" />
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.system.daisy.navigation_notification"
+        android:label="@string/notification"
+        tools:layout="@layout/fragment_navigation_notification" />
+    <fragment
+        android:id="@+id/navigation_personal"
+        android:name="com.system.daisy.navigation_personal"
+        android:label="@string/personal"
+        tools:layout="@layout/fragment_navigation_personal" />
+</navigation>

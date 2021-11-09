@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.system.daisy">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.DaisyShop">
+        <activity android:name="com.system.daisy.controller.SearchProductActivity" />
+        <activity
+            android:name="com.system.daisy.controller.EmptyCartActivity"
+            android:label="Shopping cart" />
+        <activity android:name="com.system.daisy.controller.ProductDetailActivity" />
+        <activity
+            android:name="com.system.daisy.controller.OrderDetailActivity"
+            android:label="Order detail" />
+        <activity
+            android:name="com.system.daisy.controller.OrderHistoryActivity"
+            android:label="My history orders" />
+        <activity
+            android:name="com.system.daisy.controller.PayCardActivity"
+            android:label="Credit Cart / Debit Cart" />
+        <activity
+            android:name="com.system.daisy.controller.ListProduct"
+            android:label="List Product"></activity>
+        <activity
+            android:name="com.system.daisy.controller.FavoriteProducts"
+            android:label="@string/favorite_product"></activity>
+        <activity android:name="com.system.daisy.controller.ChangePasswordActivity">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.system.daisy.controller.ForgetPasswordActivity" /> <!-- <activity android:name=".controller.ViewProductActivity" /> -->
+        <activity android:name="com.system.daisy.controller.RegisterActivity" />
+        <activity
+            android:name="com.system.daisy.controller.OrderConfirmActivity"
+            android:label="Order confirmation" />
+        <activity
+            android:name="com.system.daisy.controller.PaymentMethodActivity"
+            android:label="Payment method" />
+        <activity
+            android:name="com.system.daisy.controller.ShippingAddressActivity"
+            android:label="Shipping address" />
+        <activity
+            android:name="com.system.daisy.controller.HomeActivity"
+            android:label="@string/title_activity_home">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.system.daisy.controller.MainActivity" />
+        <activity
+            android:name="com.system.daisy.controller.ShoppingCartActivity"
+            android:label="Shopping cart"></activity>
+    </application>
+
+</manifest>
