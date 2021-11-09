@@ -1,0 +1,4 @@
+--Change layout for icon
+--Fix rating function, sql queries relating to
+--Change DB, add DB data, image for category
+--Fix category function
