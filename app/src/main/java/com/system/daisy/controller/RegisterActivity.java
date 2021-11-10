@@ -118,6 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             if(userDAO.checkExist(email)){
                 Toast.makeText(this, "Email is already in use. Please input again!", Toast.LENGTH_LONG).show();
+                return;
             }
 
             User u = new User();

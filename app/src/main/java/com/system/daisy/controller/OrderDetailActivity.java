@@ -24,6 +24,7 @@ import com.system.daisy.adapter.OrderDetailRecyclerAdapter;
 import com.system.daisy.common.Common;
 import com.system.daisy.common.Constants;
 import com.system.daisy.dao.OrderDAO;
+import com.system.daisy.dao.RatingDAO;
 import com.system.daisy.entity.CartItem;
 import com.system.daisy.entity.Orders;
 import com.system.daisy.entity.PaymentMethods;
@@ -35,6 +36,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OrderDetai
 
     ArrayList<CartItem> items;
     OrderDAO dao = new OrderDAO();
+
     OrderDetailRecyclerAdapter adapter;
 
     @Override
@@ -100,6 +102,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OrderDetai
         TextView rateProductName = rateDialog.findViewById(R.id.rateProductName);
         ImageView rateProductImage = rateDialog.findViewById(R.id.rateProductImage);
         Button rateConfirmButton = rateDialog.findViewById(R.id.rateConfirmButton);
+        Button btnFavouriteConfirm = rateDialog.findViewById(R.id.btnFavourite);
         EditText rateContent = rateDialog.findViewById(R.id.edtCardNumber);
         RatingBar rateBar = rateDialog.findViewById(R.id.rateBar);
 
@@ -115,6 +118,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OrderDetai
             }
         });
 
+
         rateConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +127,7 @@ public class OrderDetailActivity extends AppCompatActivity implements OrderDetai
                 float stars = rateBar.getRating();
                 String email = Constants.accountSave.emailAccount;
                 dao.rateProduct(new Productrating(productId, email, content, stars));
+
                 Toast toast = Toast.makeText(getApplicationContext(), "Successful rating", Toast.LENGTH_LONG);
                 toast.show();
                 rateDialog.dismiss();

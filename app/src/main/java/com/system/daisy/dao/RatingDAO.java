@@ -1,7 +1,9 @@
 package com.system.daisy.dao;
 
 import com.system.daisy.databases.DatabaseManager;
+import com.system.daisy.entity.Productrating;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -25,5 +27,23 @@ public class RatingDAO extends DatabaseManager {
             e.printStackTrace();
         }
         return ratingStars;
+    }
+
+    public void favouriteProduct(int productId, String email){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            String query = "insert into favorites values (?,GETDATE(),?,?)";
+            connection = connect();
+            ps = connection.prepareStatement(query);
+            ps.setInt(3, productId);
+            ps.setString(1, email);
+
+            ps.setString(2, email);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

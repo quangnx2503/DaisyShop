@@ -16,7 +16,7 @@ public class ProductTDAO extends DatabaseManager {
     public ArrayList<FavoriteProduct> getListProductFavorite(String email) {
         ArrayList<FavoriteProduct> list = new ArrayList<>();
         try {
-            String query = "SELECT   top 1 with ties  p.id,pf.email,p.name,pf.[time],p.price,pp.imageurl,p.sale\n" +
+            String query = "SELECT top 10 with ties  p.id,pf.email,p.name,pf.[time],p.price,pp.imageurl,p.sale\n" +
                     "FROM products p INNER JOIN\n" +
                     "favorites pf ON p.id = pf.productid INNER JOIN\n" +
                     "product_pictures pp ON pf.productid = p.id\n" +

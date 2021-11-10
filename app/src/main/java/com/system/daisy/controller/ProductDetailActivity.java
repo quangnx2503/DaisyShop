@@ -33,7 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetailActivity extends AppCompatActivity {
-
+    RatingDAO ratingDAO = new RatingDAO();
+    ProductDAO productDao = new ProductDAO();
     SliderView sliderView;
     List<String> imageSliderModelList;
     TextView name;
@@ -55,6 +56,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     CommentDAO commentDAO;
     EditText makeComment;
     Button buttonSend;
+    Button btnFavouriteConfirm;
     Common common = new Common();
 
     RatingBar ratingBar;
@@ -84,7 +86,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         descriptionDetail = findViewById(R.id.textViewDescriptionDetail);
         makeComment = findViewById(R.id.makeComment);
         buttonSend = findViewById(R.id.buttonSend);
-
+        btnFavouriteConfirm = findViewById(R.id.btnFavourite);
         Intent intent = getIntent();
         productId = intent.getIntExtra("productId", -1);
         lastComment = intent.getStringExtra("lastComment")== null ? "" : intent.getStringExtra("lastComment");
@@ -139,6 +141,19 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
 
+
+        btnFavouriteConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = Constants.accountSave.emailAccount;
+                ratingDAO.favouriteProduct(productId,email);
+
+                Toast toast = Toast.makeText(getApplicationContext(), "Successful Favourited", Toast.LENGTH_LONG);
+                toast.show();
+
+
+            }
+        });
         //rating
         ratingBar = findViewById(R.id.ratingBar);
         RatingDAO ratingDAO = new RatingDAO();
