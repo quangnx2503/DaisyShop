@@ -59,7 +59,7 @@ public class RecyclerAdapterNotification extends RecyclerView.Adapter<RecyclerAd
         }
     }
     public String changeDateToString(Date date) {
-        String pattern = "HH:mm dd/MM/yyyy";
+        String pattern = "dd/MM/yyyy";
         DateFormat df = new SimpleDateFormat(pattern);
         String dateAsString = df.format(date);
         return dateAsString;

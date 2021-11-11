@@ -9,19 +9,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ProductTDAO extends DatabaseManager {
+public class ProductCategoryDAO extends DatabaseManager {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
     public ArrayList<FavoriteProduct> getListProductFavorite(String email) {
         ArrayList<FavoriteProduct> list = new ArrayList<>();
         try {
-            String query = "SELECT top 10 with ties  p.id,pf.email,p.name,pf.[time],p.price,pp.imageurl,p.sale\n" +
-                    "FROM products p INNER JOIN\n" +
-                    "favorites pf ON p.id = pf.productid INNER JOIN\n" +
-                    "product_pictures pp ON pf.productid = p.id\n" +
-                    "where email=?\n" +
-                    "order by ROW_NUMBER() over (partition by p.id order by p.id)";
+            String query = "SELECT p.id,pf.email,p.name,pf.[time],p.price,p.Avatar,p.sale\n" +
+                    "                    FROM products p INNER JOIN\n" +
+                    "                    favorites pf ON p.id = pf.productid \n" +
+                    "                    where email=?\n" +
+                    "                    order by ROW_NUMBER() over (partition by p.id order by p.id)";
             connection = connect();
             ps = connection.prepareStatement(query);
             ps.setString(1,email);

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.system.daisy.R;
 import com.system.daisy.adapter.RecyclerAdapterListProduct;
-import com.system.daisy.dao.ProductTDAO;
+import com.system.daisy.dao.ProductCategoryDAO;
 import com.system.daisy.entity.ProductList;
 
 import java.util.ArrayList;
@@ -30,8 +30,8 @@ public class ListProduct extends AppCompatActivity implements RecyclerAdapterLis
         int subCategoryID;
         Intent intent = getIntent();
         subCategoryID = intent.getIntExtra("subcategoryID", -1);
-        ProductTDAO productTDAO = new ProductTDAO();
-        products = productTDAO.getListProductBySubCategory(subCategoryID);
+        ProductCategoryDAO productCategoryDAO = new ProductCategoryDAO();
+        products = productCategoryDAO.getListProductBySubCategory(subCategoryID);
         RecyclerView recyclerView = findViewById(R.id.lpRecyclerView);
         RecyclerAdapterListProduct adapter = new RecyclerAdapterListProduct(products,this);
         recyclerView.setAdapter(adapter);

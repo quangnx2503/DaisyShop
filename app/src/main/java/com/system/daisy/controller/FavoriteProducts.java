@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.system.daisy.R;
 import com.system.daisy.adapter.RecyclerAdapterFavoriteProducts;
 import com.system.daisy.common.Constants;
-import com.system.daisy.dao.ProductTDAO;
+import com.system.daisy.dao.ProductCategoryDAO;
 import com.system.daisy.entity.FavoriteProduct;
 
 import java.util.ArrayList;
@@ -32,9 +32,9 @@ public class FavoriteProducts extends AppCompatActivity implements RecyclerAdapt
         String email = Constants.accountSave.emailAccount;
 
         RecyclerView recyclerView = findViewById(R.id.fpRecyclerView);
-        ProductTDAO productTDAO = new ProductTDAO();
+        ProductCategoryDAO productCategoryDAO = new ProductCategoryDAO();
         TextView fpNotification= findViewById(R.id.fpNotification);
-        products = productTDAO.getListProductFavorite(email);
+        products = productCategoryDAO.getListProductFavorite(email);
         if(products.size()==0){
             fpNotification.setText("No favorite products");
         }else {

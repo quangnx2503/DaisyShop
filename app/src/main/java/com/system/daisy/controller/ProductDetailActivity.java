@@ -1,5 +1,6 @@
 package com.system.daisy.controller;
 
+import android.graphics.drawable.Drawable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,7 +25,7 @@ import com.system.daisy.common.Common;
 import com.system.daisy.common.Constants;
 import com.system.daisy.dao.CommentDAO;
 import com.system.daisy.dao.ProductDAO;
-import com.system.daisy.dao.RatingDAO;
+import com.system.daisy.dao.RatingFavoriteDAO;
 import com.system.daisy.entity.CartItem;
 import com.system.daisy.entity.Comment;
 import com.system.daisy.entity.Product;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetailActivity extends AppCompatActivity {
-    RatingDAO ratingDAO = new RatingDAO();
+    RatingFavoriteDAO ratingFavoriteDAO = new RatingFavoriteDAO();
     ProductDAO productDao = new ProductDAO();
     SliderView sliderView;
     List<String> imageSliderModelList;
@@ -140,24 +141,41 @@ public class ProductDetailActivity extends AppCompatActivity {
                 }
             }
         });
+        boolean check = ratingFavoriteDAO.checkFavorite(productId,Constants.accountSave.emailAccount);
+        if (check) {
+//            @android:drawable/btn_star_big_on
+
+            btnFavouriteConfirm.setBackground(Drawable.createFromPath("drawable/btn_star_big_on"));
+
+        }
+
+            btnFavouriteConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //            @android:color/secondary_text_dark
+                    String email = Constants.accountSave.emailAccount;
+                    if(ratingFavoriteDAO.checkFavorite(productId,Constants.accountSave.emailAccount)){
+
+                        ProductDetailActivity.this.ratingFavoriteDAO.unFavorite(productId,email);
+//                        btnFavouriteConfirm.setBackgroundColor(Integer.parseInt("color/text_color_primary.xml"));
+                        btnFavouriteConfirm.setBackground(Drawable.createFromPath("drawable/background_holo_dark.xml"));
+                        Toast toast = Toast.makeText(getApplicationContext(), "Un-Favourited Successful ", Toast.LENGTH_LONG);
+                        toast.show();
+                    }else {
+                    ProductDetailActivity.this.ratingFavoriteDAO.favouriteProduct(productId,email);
+
+                    btnFavouriteConfirm.setBackground(Drawable.createFromPath("drawable/btn_star_big_on"));
+                    Toast toast = Toast.makeText(getApplicationContext(), "Successful Favourited", Toast.LENGTH_LONG);
+                    toast.show();
+                }}
+            });
 
 
-        btnFavouriteConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = Constants.accountSave.emailAccount;
-                ratingDAO.favouriteProduct(productId,email);
 
-                Toast toast = Toast.makeText(getApplicationContext(), "Successful Favourited", Toast.LENGTH_LONG);
-                toast.show();
-
-
-            }
-        });
         //rating
         ratingBar = findViewById(R.id.ratingBar);
-        RatingDAO ratingDAO = new RatingDAO();
-        float dataStars = ratingDAO.rateProduct(productId);
+        RatingFavoriteDAO ratingFavoriteDAO = new RatingFavoriteDAO();
+        float dataStars = ratingFavoriteDAO.rateProduct(productId);
         ratingBar.setRating(dataStars);
 
         //header

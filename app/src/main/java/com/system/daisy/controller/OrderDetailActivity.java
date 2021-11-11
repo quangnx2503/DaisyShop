@@ -24,7 +24,6 @@ import com.system.daisy.adapter.OrderDetailRecyclerAdapter;
 import com.system.daisy.common.Common;
 import com.system.daisy.common.Constants;
 import com.system.daisy.dao.OrderDAO;
-import com.system.daisy.dao.RatingDAO;
 import com.system.daisy.entity.CartItem;
 import com.system.daisy.entity.Orders;
 import com.system.daisy.entity.PaymentMethods;
