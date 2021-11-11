@@ -124,18 +124,20 @@
 
             <Button
                     android:id="@+id/btnFavourite"
-                    android:layout_width="62dp"
-                    android:layout_height="41dp"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@id/cv_slider_mainActivity"
                     android:layout_marginStart="320dp"
-                    android:layout_marginTop="19dp"
+                    android:layout_marginTop="16dp"
                     android:textColorLink="@color/white"
-                    android:textSize="15sp" app:icon="@drawable/heart_icon"
-                    android:backgroundTint="@android:color/secondary_text_light"
-                    android:background="@color/purple_200"
-                    android:backgroundTintMode="screen" app:rippleColor="@color/ic_launcher_background"
-                    app:iconTint="@android:color/holo_red_light" style="@android:style/Widget.Button.Small"
-                    tools:text="Like"/>
+                    android:textSize="15sp"
+
+                    android:backgroundTintMode="screen"
+                    app:rippleColor="@color/ic_launcher_background"
+                    android:background="@drawable/btn_favorite"
+                    app:iconTint="@android:color/holo_red_light"
+                    style="@android:style/Widget.Button.Small"/>
+
             <TextView
                     android:id="@+id/textViewRealPRice"
                     android:layout_width="wrap_content"

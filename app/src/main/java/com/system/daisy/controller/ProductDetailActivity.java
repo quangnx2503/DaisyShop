@@ -1,23 +1,15 @@
 package com.system.daisy.controller;
 
-import android.graphics.drawable.Drawable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.smarteist.autoimageslider.SliderView;
 import com.system.daisy.R;
@@ -49,6 +41,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView descriptionDetail;
     int productId;
     Product product;
+    boolean check;
 
     //for comment
     RecyclerView commemtRecyclerView;
@@ -90,7 +83,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnFavouriteConfirm = findViewById(R.id.btnFavourite);
         Intent intent = getIntent();
         productId = intent.getIntExtra("productId", -1);
-        lastComment = intent.getStringExtra("lastComment")== null ? "" : intent.getStringExtra("lastComment");
+        lastComment = intent.getStringExtra("lastComment") == null ? "" : intent.getStringExtra("lastComment");
         ProductDAO productDAO = new ProductDAO();
         product = productDAO.getProductDetail(productId);
         name.setText(product.getName());
@@ -141,35 +134,36 @@ public class ProductDetailActivity extends AppCompatActivity {
                 }
             }
         });
-        boolean check = ratingFavoriteDAO.checkFavorite(productId,Constants.accountSave.emailAccount);
+        check = ratingFavoriteDAO.checkFavorite(productId, Constants.accountSave.emailAccount);
         if (check) {
 //            @android:drawable/btn_star_big_on
 
-            btnFavouriteConfirm.setBackground(Drawable.createFromPath("drawable/btn_star_big_on"));
+            btnFavouriteConfirm.setBackgroundResource(R.drawable.ic_favorite);
 
         }
 
-            btnFavouriteConfirm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //            @android:color/secondary_text_dark
-                    String email = Constants.accountSave.emailAccount;
-                    if(ratingFavoriteDAO.checkFavorite(productId,Constants.accountSave.emailAccount)){
-
-                        ProductDetailActivity.this.ratingFavoriteDAO.unFavorite(productId,email);
-//                        btnFavouriteConfirm.setBackgroundColor(Integer.parseInt("color/text_color_primary.xml"));
-                        btnFavouriteConfirm.setBackground(Drawable.createFromPath("drawable/background_holo_dark.xml"));
-                        Toast toast = Toast.makeText(getApplicationContext(), "Un-Favourited Successful ", Toast.LENGTH_LONG);
+        btnFavouriteConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //            @android:color/secondary_text_dark
+                String email = Constants.accountSave.emailAccount;
+                if (check) {
+                    if(ratingFavoriteDAO.unFavorite(productId, Constants.accountSave.emailAccount)){
+                        ProductDetailActivity.this.ratingFavoriteDAO.unFavorite(productId, email);
+                        check = false;
+                        btnFavouriteConfirm.setBackgroundResource(R.drawable.ic_unfavorite);
+                        Toast.makeText(getApplicationContext(), "Un-Favorite Successful ", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    if(ratingFavoriteDAO.favouriteProduct(productId, Constants.accountSave.emailAccount)) {
+                        btnFavouriteConfirm.setBackgroundResource(R.drawable.ic_favorite);
+                        check = true;
+                        Toast toast = Toast.makeText(getApplicationContext(), "Successful Favorite", Toast.LENGTH_LONG);
                         toast.show();
-                    }else {
-                    ProductDetailActivity.this.ratingFavoriteDAO.favouriteProduct(productId,email);
-
-                    btnFavouriteConfirm.setBackground(Drawable.createFromPath("drawable/btn_star_big_on"));
-                    Toast toast = Toast.makeText(getApplicationContext(), "Successful Favourited", Toast.LENGTH_LONG);
-                    toast.show();
-                }}
-            });
-
+                    }
+                }
+            }
+        });
 
 
         //rating
@@ -249,7 +243,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 Intent loginIntent = new Intent(ProductDetailActivity.this, MainActivity.class);
                 loginIntent.putExtra("lastActivity", "productDetail");
                 loginIntent.putExtra("productId", productId);
-                loginIntent.putExtra("lastComment",makeComment.getText().toString());
+                loginIntent.putExtra("lastComment", makeComment.getText().toString());
                 startActivity(loginIntent);
             }
         });

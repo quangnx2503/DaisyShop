@@ -72,7 +72,7 @@ public class RatingFavoriteDAO extends DatabaseManager {
         return false;
     }
 
-    public void favouriteProduct(int productId, String email){
+    public boolean favouriteProduct(int productId, String email){
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -84,9 +84,10 @@ public class RatingFavoriteDAO extends DatabaseManager {
             ps.setString(1, email);
 
             ps.setString(2, email);
-            ps.executeUpdate();
+            return  ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 }
