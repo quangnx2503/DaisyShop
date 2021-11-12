@@ -25,8 +25,8 @@ public class CommentDAO extends DatabaseManager {
             rs = statement.executeQuery();
             while (rs.next()) {
                 Comment comment = new Comment();
-                comment.setQuestion(rs.getString("question"));
-                comment.setAnswer(rs.getString("answer"));
+                             comment.setAnswer(rs.getString("answer"));
+                comment.setEmail(rs.getString("email"));
                 comments.add(comment);
             }
         } catch (SQLException throwables) {
@@ -38,7 +38,7 @@ public class CommentDAO extends DatabaseManager {
     public void insertComment(String email,int productid,String comment) {
         try {
             String sql = "insert into comments (email,answer,commenttime,productid)\n" +
-                    "values (?,?,GETDATE(),?)";
+                    "values (?,?,CURRENT_TIMESTAMP,?)";
             connection = connect();
             statement = connection.prepareStatement(sql);
             statement.setString(1,email);

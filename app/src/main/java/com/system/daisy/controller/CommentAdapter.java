@@ -35,7 +35,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        holder.question.setText(commentList.get(position).getQuestion());
+        holder.question.setText(commentList.get(position).getEmail());
         String answer = commentList.get(position).getAnswer() == null ? "Please wait for answer..." :
                 commentList.get(position).getAnswer() ;
         holder.answer.setText(answer);

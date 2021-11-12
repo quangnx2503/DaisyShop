@@ -3,9 +3,23 @@ package com.system.daisy.entity;
 public class Comment {
     private String question;
     private String answer;
+    private String email;
+
 
     public Comment() {
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public Comment(String question, String answer,String email) {
+        this.question = question;
+        this.answer = answer;this.email = email;
     }
 
     public Comment(String question, String answer) {
