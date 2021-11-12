@@ -14,13 +14,14 @@ import com.system.daisy.R;
 import com.system.daisy.adapter.RecyclerAdapterFavoriteProducts;
 import com.system.daisy.common.Constants;
 import com.system.daisy.dao.ProductCategoryDAO;
+import com.system.daisy.dao.RatingFavoriteDAO;
 import com.system.daisy.entity.FavoriteProduct;
 
 import java.util.ArrayList;
 
 public class FavoriteProducts extends AppCompatActivity implements RecyclerAdapterFavoriteProducts.OnViewProductFavoriteListener {
 
-
+    RatingFavoriteDAO ratingFavoriteDAO = new RatingFavoriteDAO();
     ArrayList<FavoriteProduct> products;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
